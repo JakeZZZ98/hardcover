@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#2B2620">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2620"/></marker><marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A2F3A"/></marker></defs>
+<rect width="720" height="330" rx="14" fill="#F6F1E6"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,250.0 160.0,250.0 L590.0,250.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="590.0" cy="250.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,239.0 160.0,239.0 L583.9,239.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="583.9" cy="239.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,228.0 160.0,228.0 L577.8,228.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="577.8" cy="228.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,217.0 160.0,217.0 L571.7,217.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="571.7" cy="217.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,206.0 160.0,206.0 L565.7,206.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="565.7" cy="206.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,195.0 160.0,195.0 L559.6,195.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="559.6" cy="195.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,184.0 160.0,184.0 L553.5,184.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="553.5" cy="184.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,173.0 160.0,173.0 L547.4,173.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="547.4" cy="173.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,162.0 160.0,162.0 L541.3,162.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="541.3" cy="162.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,151.0 160.0,151.0 L535.2,151.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="535.2" cy="151.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,140.0 160.0,140.0 L529.2,140.0" stroke="#2B2620" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="529.2" cy="140.0" r="2.5" fill="#2B2620"/>
+<path d="M70.0,254.0 C110.0,254.0 120.0,129.0 160.0,129.0 L523.1,129.0" stroke="#8A2F3A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="523.1" cy="129.0" r="2.5" fill="#8A2F3A"/>
+<circle cx="70.0" cy="254.0" r="6" fill="#2B2620"/>
+<text x="62.0" y="280.0" font-size="12" fill="#8A7F70" text-anchor="end">binding</text>
+<line x1="620.0" y1="250.0" x2="620.0" y2="129.0" stroke="#8A7F70" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="630.0" y="193.5" font-size="12" fill="#8A7F70" text-anchor="start">the steps show</text>
+<text x="630.0" y="209.5" font-size="12" fill="#8A7F70" text-anchor="start">from above</text>
+<text x="190.0" y="113.0" font-size="13" fill="#8A2F3A" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">reach = 1 − 0.006 × (sheets below) + jitter</text>
+<text x="24.0" y="36.0" font-size="17" fill="#2B2620" text-anchor="start" font-weight="bold">Making it look thick: the fore-edge steps back</text>
+<text x="24.0" y="58.0" font-size="13" fill="#8A7F70" text-anchor="start">a higher sheet wraps round more of the stack, so it ends a little sooner (side view, exaggerated)</text>
+<text x="100.0" y="280.0" font-size="12" fill="#8A7F70" text-anchor="start" font-style="italic">gutter</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#2B2620">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2620"/></marker><marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A2F3A"/></marker></defs>
+<rect width="720" height="400" rx="14" fill="#F6F1E6"/>
+<rect x="246.0" y="324.0" width="380.0" height="12.0" fill="#D9CFBD"/>
+<line x1="250.0" y1="322.8" x2="610.0" y2="321.6" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="320.4" x2="605.2" y2="319.2" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="318.0" x2="600.4" y2="316.8" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="315.6" x2="595.6" y2="314.4" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="313.2" x2="590.8" y2="312.0" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="310.8" x2="586.0" y2="309.6" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="308.4" x2="581.2" y2="307.2" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="250.0" y1="306.0" x2="576.4" y2="304.8" stroke="#8A7F70" stroke-width="1.5" stroke-linecap="round"/>
+<text x="490.0" y="358.0" font-size="12" fill="#8A7F70" text-anchor="middle" font-style="italic">the block (right-hand pages)</text>
+<path d="M245.2,302.4 L241.6,300.3 L238.0,298.2 L234.4,296.2 L230.9,294.2 L227.4,292.2 L224.1,290.4 L220.8,288.6 L217.6,287.0 L214.6,285.4 L211.6,284.0 L208.9,282.8 L206.3,281.7 L203.8,280.8 L201.5,280.0 L199.5,279.5 L197.6,279.1 L195.9,278.9 L194.4,278.9 L193.1,279.2 L192.0,279.6 L191.1,280.2 L190.5,281.1 L190.0,282.1 L189.7,283.4 L189.7,284.9 L189.8,286.5 L190.1,288.3 L190.6,290.3 L191.2,292.5 L192.0,294.8 L193.0,297.3 L194.1,299.9 L195.3,302.7 L196.6,305.5 L198.0,308.4 L199.5,311.5 L201.1,314.5 L202.7,317.7 L204.3,320.8 L206.0,324.0" stroke="#3E6A8A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<circle cx="206.0" cy="324.0" r="5" fill="#3E6A8A"/>
+<text x="196.0" y="328.0" font-size="12" fill="#3E6A8A" text-anchor="end">hinge, open</text>
+<circle cx="245.2" cy="302.4" r="5" fill="#3E6A8A"/>
+<line x1="248.2" y1="307.4" x2="275.2" y2="362.0" stroke="#3E6A8A" stroke-width="1" stroke-linecap="round"/>
+<text x="279.2" y="374.0" font-size="12" fill="#3E6A8A" text-anchor="start">hinge, shut</text>
+<line x1="192.0" y1="279.6" x2="297.2" y2="81.8" stroke="#2B2620" stroke-width="6" stroke-linecap="round"/>
+<text x="307.2" y="85.8" font-size="13" fill="#2B2620" text-anchor="start">cover (θc)</text>
+<line x1="250.0" y1="304.8" x2="384.2" y2="105.8" stroke="#8A2F3A" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="283.6" cy="255.1" r="4.5" fill="#8A2F3A"/>
+<text x="293.6" y="269.1" font-size="12" fill="#8A2F3A" text-anchor="start">u = ¼</text>
+<circle cx="317.1" cy="205.3" r="4.5" fill="#8A2F3A"/>
+<text x="327.1" y="219.3" font-size="12" fill="#8A2F3A" text-anchor="start">u = ½</text>
+<circle cx="384.2" cy="105.8" r="4.5" fill="#8A2F3A"/>
+<text x="394.2" y="119.8" font-size="12" fill="#8A2F3A" text-anchor="start">u = 1</text>
+<text x="24.0" y="36.0" font-size="17" fill="#2B2620" text-anchor="start" font-weight="bold">The cover hinges on a moving point</text>
+<text x="24.0" y="58.0" font-size="13" fill="#8A7F70" text-anchor="start">so a leaf is limited by the cover's plane, not its angle (hinge path exaggerated)</text>
+<text x="470.0" y="110.0" font-size="13" fill="#2B2620" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">clearance(u) = signed distance</text>
+<text x="470.0" y="128.0" font-size="13" fill="#2B2620" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">to the cover's inner plane</text>
+<text x="470.0" y="158.0" font-size="13" fill="#8A7F70" text-anchor="start">coverLimit: bisect for the</text>
+<text x="470.0" y="176.0" font-size="13" fill="#8A7F70" text-anchor="start">largest leaf angle with</text>
+<text x="470.0" y="194.0" font-size="13" fill="#8A7F70" text-anchor="start">clearance ≥ 0 at u = ¼, ½, 1</text>
+<text x="470.0" y="230.0" font-size="13" fill="#3E6A8A" text-anchor="start">The hinge path bulges round the</text>
+<text x="470.0" y="248.0" font-size="13" fill="#3E6A8A" text-anchor="start">back of the block, like spine cloth.</text>
+</svg>
