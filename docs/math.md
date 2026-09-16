@@ -69,7 +69,7 @@ x_{tip} = W\cos\theta
 When a sheet is grabbed the engine records that projection, x₀ = W cos θ₀, and the pointer's x, p₀. When the pointer is at p, the sheet should be at the angle whose tip projects to x₀ + (p − p₀):
 
 ```math
-\theta_{target} = \arccos\!\left(\operatorname{clamp}\!\left(\frac{x_0 + p - p_0}{W},\,-1,\,1\right)\right)
+\theta_{target} = \arccos\!\left(\mathrm{clamp}\!\left(\frac{x_0 + p - p_0}{W},\,-1,\,1\right)\right)
 ```
 
 Three properties make this the right mapping:
@@ -218,7 +218,7 @@ D starts at 0 and never decreases, so the curve never crosses to the neighbour's
 **Lighting the bend.** The normal must follow the arc, or the curve looks painted on. The shader evaluates the same `bent()` function one grid cell either side of the vertex and crosses the central differences:
 
 ```math
-\mathbf{n} = \operatorname{normalize}\!\Big(\big(\mathbf{p}(x + \Delta x) - \mathbf{p}(x - \Delta x)\big) \times \big(\mathbf{p}(y + \Delta y) - \mathbf{p}(y - \Delta y)\big)\Big)
+\mathbf{n} = \mathrm{normalize}\!\Big(\big(\mathbf{p}(x + \Delta x) - \mathbf{p}(x - \Delta x)\big) \times \big(\mathbf{p}(y + \Delta y) - \mathbf{p}(y - \Delta y)\big)\Big)
 ```
 
 Central differences are second-order accurate (error ∝ Δ²), and using the grid spacing (W/56, H/24) means the normal matches the facets you actually see.
@@ -326,7 +326,7 @@ of uncertainty — 0.02 % of a page width at the fore-edge. This limit replaces 
 When the cover moves, each sheet on its side (depth d = 0 next to the cover, increasing away from it) chases
 
 ```math
-\theta_d^{target} = \operatorname{clamp}\!\big(\theta_c - \text{fan}\cdot d\cdot\sin\theta_c,\ 0,\ \text{coverLimit}\big)
+\theta_d^{target} = \mathrm{clamp}\!\big(\theta_c - \text{fan}\cdot d\cdot\sin\theta_c,\ 0,\ \text{coverLimit}\big)
 ```
 
 on a critically damped spring with response 0.10 + 0.025·d seconds. sin θ_c is zero at both ends of the motion, so the fan opens mid-way and closes up by the time the cover lands; the offset lets the sheets furthest from the cover fall first, and their slightly slower springs soften the lead — like the pages of a book falling shut. The glued flyleaf copies the cover exactly.
