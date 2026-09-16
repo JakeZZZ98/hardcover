@@ -308,6 +308,47 @@ def rest_and_move():
     svg("rest-and-move.svg", w, h, b)
 
 
-for fn in (hinge_angle, drag_mapping, bend_arc, angle_chain, cover_plane, fore_edge, rest_and_move):
+# 8 ---------------------------------------------------------------------------------------------
+def face_transform():
+    w, h = 720, 384
+    b = []
+    # the DOM page, CSS pixels
+    ox, oy, pw, ph = 40, 96, 150, 222
+    b.append(f'<rect x="{ox}" y="{oy}" width="{pw}" height="{ph}" rx="4" fill="#FFFDF7" stroke="{INK}" stroke-width="1.5"/>')
+    for i, yy in enumerate((0.18, 0.26, 0.34)):
+        b.append(line(ox + 18, oy + yy * ph, ox + pw - 18 - i * 22, oy + yy * ph, FAINT, 5))
+    b.append(f'<rect x="{ox + 18}" y="{oy + 0.48 * ph:.1f}" width="{pw - 36}" height="26" rx="4" fill="none" stroke="{INK}" stroke-width="1.3"/>')
+    b.append(text(ox + 26, oy + 0.48 * ph + 18, "Ada|", 12, INK))
+    A, B, C = (ox + 0.2 * pw, oy), (ox + 0.8 * pw, oy), (ox + 0.2 * pw, oy + ph)
+    for (px, py), lab in ((A, "A"), (B, "B"), (C, "C")):
+        b.append(dot(px, py, 5, ACCENT))
+        b.append(text(px, py - 9 if lab != "C" else py + 20, lab, 13, ACCENT, "middle", weight="bold"))
+    b.append(text(ox + pw / 2, oy + ph + 44, "the HTML page, 500 × 740 CSS px", 12, SOFT, "middle"))
+    # the pipeline
+    steps = ["page units (u, y)", "bentPoint() = the shader's arc", "book matrix → camera", "canvas pixels A′ B′ C′"]
+    sx0 = 240
+    for i, st in enumerate(steps):
+        y = 118 + i * 52
+        b.append(f'<rect x="{sx0}" y="{y}" width="210" height="34" rx="8" fill="#FFFDF7" stroke="{SOFT}" stroke-width="1.2"/>')
+        b.append(text(sx0 + 105, y + 22, st, 13, INK, "middle"))
+        if i < len(steps) - 1:
+            b.append(line(sx0 + 105, y + 34, sx0 + 105, y + 50, INK, 1.4, marker="arrow"))
+    b.append(line(ox + pw + 10, oy + 40, sx0 - 8, 135, SOFT, 1.2, "4 4", marker="arrow"))
+    # the result on screen
+    rx, ry = 500, 110
+    b.append(f'<rect x="{rx}" y="{ry}" width="190" height="150" rx="6" fill="{FAINT}"/>')
+    qx, qy, qw, qh = rx + 40, ry + 18, 112, 116
+    b.append(f'<rect x="{qx}" y="{qy}" width="{qw}" height="{qh}" fill="#FFFDF7" stroke="{ACCENT}" stroke-width="1.6"/>')
+    for (px, py), lab in (((qx + 0.2 * qw, qy), "A′"), ((qx + 0.8 * qw, qy), "B′"), ((qx + 0.2 * qw, qy + qh), "C′")):
+        b.append(dot(px, py, 4.5, ACCENT))
+    b.append(text(rx + 95, ry + 176, "sx = (B′x − A′x) / 0.6w", 12, ACCENT, "middle", family=MONO))
+    b.append(text(rx + 95, ry + 194, "sy = (C′y − A′y) / h", 12, ACCENT, "middle", family=MONO))
+    b.append(text(rx + 95, ry + 212, "tx = A′x − 0.2w·sx, ty = A′y", 12, ACCENT, "middle", family=MONO))
+    b.append(text(24, 36, "Where does the HTML go? Ask the shader.", 17, INK, weight="bold"))
+    b.append(text(24, 58, "three points of the page follow the same maths the GPU applies to that spot of paper", 13, SOFT))
+    svg("face-transform.svg", w, h, b)
+
+
+for fn in (hinge_angle, drag_mapping, bend_arc, angle_chain, cover_plane, fore_edge, rest_and_move, face_transform):
     fn()
 print("ok")

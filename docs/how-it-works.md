@@ -9,6 +9,11 @@ hardcover is two small pieces:
 
 This article walks through the model, the hand-feel, the geometry that keeps the book solid, the tricks that make it read as *thick*, how real HTML can lie on a page, and how all of it is tested. It assumes you are comfortable with a little trigonometry and have seen a vertex shader before. Every number quoted is a default you can change in the demo's panel.
 
+Two companion documents go deeper:
+
+- **[The maths behind hardcover](math.md)** derives every formula below, including why the spring integrator needs a step limit.
+- **[Keeping HTML on a turning page](html-on-paper.md)** is the full walk-through of how a text field stays on the paper while it turns.
+
 ![The demo book mid-turn](images/hero.webp)
 
 ## Contents
@@ -130,12 +135,13 @@ clamped to ±12 rad/s. The floor on sin θ stops a nearly flat page from receivi
 
 ```ts
 export function springStep(x, v, target, damping, response, dt) {
-  const w = (2 * PI) / Math.max(0.01, response);
-  const k = w * w;             // stiffness
-  const c = 2 * damping * w;   // damping coefficient
+  const w = (2 * PI) / Math.max(0.005, response);
+  const k = w * w;                            // stiffness
+  const c = 2 * damping * w;                  // damping coefficient
+  const hMax = Math.min(1 / 240, 0.5 / w);    // small enough to be stable for any response
   let t = dt;
-  while (t > 0) {              // semi-implicit Euler, sub-stepped at 1/240 s
-    const h = Math.min(t, 1 / 240);
+  while (t > 0) {                             // semi-implicit Euler
+    const h = Math.min(t, hMax);
     v += (k * (target - x) - c * v) * h;
     x += v * h;
     t -= h;
@@ -144,7 +150,7 @@ export function springStep(x, v, target, damping, response, dt) {
 }
 ```
 
-Pages use ζ = 0.82, response 0.5 s: a hair under critical, so a thrown page lands with the faintest settle. Sub-stepping keeps a 50 ms frame (a hiccup, a background tab) stable. A sheet is declared at rest when |θ − target| < 0.0015 and |ω| < 0.02; it snaps exactly to 0 or π so the stack is exact again.
+Pages use ζ = 0.82, response 0.5 s: a hair under critical, so a thrown page lands with the faintest settle. Sub-stepping keeps a 50 ms frame (a hiccup, a background tab) stable. The second limit on the step, 0.5/ω, is not decoration: without it a response shorter than about 32 ms makes semi-implicit Euler diverge — [the maths, §4](math.md#4-springs-and-keeping-them-stable) derives the bound. A sheet is declared at rest when |θ − target| < 0.0015 and |ω| < 0.02; it snaps exactly to 0 or π so the stack is exact again.
 
 Taps are releases too: a press that did not move, shorter than 250 ms, is released with 1.5 × the flick speed — right page forward, left page back, a shut book opens.
 
@@ -310,6 +316,8 @@ The pattern has two states:
 
 A future note: Chrome's HTML-in-Canvas API (in origin trial in 2026) draws live DOM straight into a WebGL texture, which could replace the printing step entirely where it is available.
 
+The whole pattern — the options, the order of operations, how the printer places text, the pitfalls and the tests — is written up step by step in **[Keeping HTML on a turning page](html-on-paper.md)**.
+
 ## 12. Drawing only when something moves
 
 ```ts
@@ -348,7 +356,7 @@ it("a page in flight can be caught, pulled back and let go", () => {
 });
 ```
 
-`npm test` runs 20 of these: following, falling back, flicking, catching, turning back, staying within [0, π], staggered programmatic turns, reduced motion, closing with pages, the ordering never violated while a page is still turning as the cover shuts, bend limits, and a **geometry probe**: over a whole close — just after a flick, and dragged shut by hand — it samples 40 points along every turned leaf against the cover's inner plane and asserts nothing goes deeper than 0.2 % of a page width. The probe checks that the constraints hold in the engine's geometry; the renderer draws from the same functions (`bindZ`, `flatZ`, `coverPlane`, `GUTTER_SPAN`), which is what keeps the drawn book honest.
+`npm test` runs 23 of these — 3 for the spring and the low-pass on their own, and 20 for the book: following, falling back, flicking, catching, turning back, staying within [0, π], staggered programmatic turns, reduced motion, closing with pages, the ordering never violated while a page is still turning as the cover shuts, bend limits, and a **geometry probe**: over a whole close — just after a flick, and dragged shut by hand — it samples 40 points along every turned leaf against the cover's inner plane and asserts nothing goes deeper than 0.2 % of a page width. The probe checks that the constraints hold in the engine's geometry; the renderer draws from the same functions (`bindZ`, `flatZ`, `coverPlane`, `GUTTER_SPAN`), which is what keeps the drawn book honest.
 
 **The demo, in a real browser.** Visual effects have a special failure mode: a hidden or throttled tab stops `requestAnimationFrame`, and an animation that never runs "passes" every state check. So `verify/run.mjs` launches headless Chrome itself, serves the build, and drives it over the DevTools protocol with `Input.dispatchMouseEvent` — the same hit-testing and pointer events a hand produces. It checks, in order: the book loads shut and the loop sleeps; a tap opens it; a slow drag past half-way turns a page; a short slow drag falls back; a 40 ms flick turns one; a page caught 70 ms after a flick comes back; Esc closes with the pages riding along; Enter reopens; arrow keys turn; **frame pacing while pages turn** (60 fps, worst gap 16.8 ms on an M4 Pro, Chrome 152); the reading view places the live page on blank paper; typed text is printed onto the turning page; back at rest the HTML returns with its value; the loop sleeps again; reduced motion opens at once; and no console errors. It saves screenshots of each state — including the canvas alone under the live page, to catch the ghost from §11.
 

@@ -4,7 +4,7 @@ A hardcover book for the web whose pages you can **drag, flick, catch mid-air an
 
 ![A page being dragged, flicked, caught and the book closed](docs/images/hero.webp)
 
-**[Live demo](https://jakezzz98.github.io/hardcover/)** · **[How it works](docs/how-it-works.md)** (the long read: model, physics, shader, tests)
+**[Live demo](https://jakezzz98.github.io/hardcover/)** · **[How it works](docs/how-it-works.md)** · **[The maths](docs/math.md)** · **[HTML on a turning page](docs/html-on-paper.md)**
 
 ## What it does
 
@@ -22,7 +22,7 @@ A hardcover book for the web whose pages you can **drag, flick, catch mid-air an
 ```bash
 npm install
 npm run dev        # the demo at http://localhost:5173
-npm test           # 20 engine tests, no browser needed
+npm test           # 23 engine tests, no browser needed
 npm run verify     # builds, then drives the demo in headless Chrome (see verify/run.mjs)
 ```
 
@@ -100,6 +100,12 @@ engine.step(1 / 60);          // advance from your own clock
 engine.leaves[0].theta;       // 0 = lying right … π = lying left
 engine.bendOf(engine.leaves[0]); // the arc to draw it with
 ```
+
+## Docs
+
+- **[How it works](docs/how-it-works.md)** — the long read: what it had to feel like, the one-angle-per-sheet model, following the hand, flicks, catching, bending, the stacking order, closing, thickness, HTML on the paper, testing.
+- **[The maths](docs/math.md)** — every formula derived: the drag mapping, spring parameters and why the integrator needs a step limit, the release velocity, the arc a page bends into, why the bend cannot cross a neighbour, the stacking order as inelastic contact, the cover's moving hinge and plane, fore-edge and shadows, placing HTML with a projection.
+- **[Keeping HTML on a turning page](docs/html-on-paper.md)** — how a text field sits on the paper, typeable at rest and carried on the page while it turns: the options, the two states, the order of operations, how the printer lines text up to the pixel, pitfalls and tests.
 
 ## Layout
 
