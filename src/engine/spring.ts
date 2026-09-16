@@ -17,16 +17,21 @@ export const smooth01 = (k: number): number => {
 };
 
 /**
- * Advance a damped spring by `dt` seconds (semi-implicit Euler, sub-stepped
- * at ≤ 1/240 s so a 50 ms frame stays stable). Returns [value, velocity].
+ * Advance a damped spring by `dt` seconds (semi-implicit Euler). Returns [value, velocity].
+ *
+ * Semi-implicit Euler on this spring is stable only while the step h satisfies
+ * (hω)² + 4ζ·hω < 4 and ζ·hω < 1 (ω = 2π / response; see docs/math.md §4). A
+ * fixed 1/240 s step breaks that for responses under ~32 ms, so the step is
+ * also capped at 0.5/ω, which keeps it stable for any damping ratio up to 1.8.
  */
 export function springStep(x: number, v: number, target: number, damping: number, response: number, dt: number): [number, number] {
-  const w = (2 * PI) / Math.max(0.01, response);
+  const w = (2 * PI) / Math.max(0.005, response);
   const k = w * w;
   const c = 2 * damping * w;
+  const hMax = Math.min(1 / 240, 0.5 / w);
   let t = dt;
   while (t > 0) {
-    const h = Math.min(t, 1 / 240);
+    const h = Math.min(t, hMax);
     const a = k * (target - x) - c * v;
     v += a * h;
     x += v * h;
