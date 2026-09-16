@@ -263,15 +263,25 @@ try {
   await sleep(120);
   s = await state();
   check("reduced motion: the cover opens at once", !s.closed, JSON.stringify(s));
-  /* 11. the minimal example from the README runs and turns a page */
+  /* 11. the README's mountBook example: shut → tap opens → drag turns (checked by the picture changing) */
   await send("Emulation.setEmulatedMedia", { features: [] });
   const before = errors.length;
+  const grab = async () => (await send("Page.captureScreenshot", { format: "png" })).result.data;
   await send("Page.navigate", { url: `${base}examples/minimal.html` });
   await sleep(2500);
+  const shut = await grab();
+  await mouse("mouseMoved", 640, 400);
+  await mouse("mousePressed", 640, 400, 1);
+  await sleep(40);
+  await mouse("mouseReleased", 640, 400);
+  await sleep(2600);
+  const opened = await grab();
+  writeFileSync(join(out, "10-minimal-open.png"), Buffer.from(opened, "base64"));
   await drag([1000, 400], [420, 380], 700);
   await sleep(1800);
-  await shot("10-minimal-example.png");
-  check("the minimal example loads and turns without errors", errors.length === before, errors.slice(before).join(" | "));
+  const turned = await grab();
+  writeFileSync(join(out, "11-minimal-turned.png"), Buffer.from(turned, "base64"));
+  check("mountBook example: a tap opens it and a drag turns a page, without errors", shut !== opened && opened !== turned && errors.length === before, errors.slice(before).join(" | "));
 } catch (e) {
   check("run finished", false, e.stack ?? String(e));
 }

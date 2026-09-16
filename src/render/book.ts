@@ -729,8 +729,16 @@ export function createBook(canvas: HTMLCanvasElement, options: BookOptions = {})
     const f = faces[face];
     if (!f) return;
     const g = f.canvas.getContext("2d")!;
+    g.save();
     paintPaper(g, TEX_W, TEX_H, f.info.gutter, COLORS.paper);
+    g.restore();
+    // Hand the painter a clean state: dark ink, serif, alphabetic baseline.
+    g.save();
+    g.fillStyle = g.strokeStyle = "#2B2620";
+    g.font = `${Math.round(TEX_W / 26)}px Georgia, "Times New Roman", serif`;
+    g.textBaseline = "alphabetic";
     options.paintFace?.(g, TEX_W, TEX_H, f.info);
+    g.restore();
     f.texture.needsUpdate = true;
   };
   faces.forEach((_, face) => repaintFace(face));
