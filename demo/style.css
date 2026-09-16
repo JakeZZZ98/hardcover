@@ -1,0 +1,198 @@
+:root {
+  --paper: #ece5d6;
+  --ink: #2b2620;
+  --soft: #6f6558;
+  --accent: #8a2f3a;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 40%, #f3eee3 0%, var(--paper) 60%, #e2d9c6 100%);
+  color: var(--ink);
+  font: 15px/1.5 Georgia, "Times New Roman", serif;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+}
+
+#book {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+#book.over-book {
+  cursor: grab;
+}
+#book.dragging {
+  cursor: grabbing;
+}
+
+/* The live page: 500 × 740 CSS pixels, placed on the paper with a scale + translate from the renderer. */
+#form-page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 500px;
+  height: 740px;
+  padding: 0 56px;
+  transform-origin: 0 0;
+  cursor: grab;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+/* Put away, but still laid out: the printer reads its layout. */
+#form-page.asleep {
+  opacity: 0;
+  pointer-events: none;
+}
+#form-page p,
+#form-page h2 {
+  margin: 0;
+}
+#form-page .eyebrow {
+  padding-top: 80px;
+  font: 600 12px/16px Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+#form-page h2 {
+  margin-top: 34px;
+  font: 400 36px/44px Georgia, "Times New Roman", serif;
+}
+#form-page .body {
+  margin-top: 18px;
+  font: 400 19px/30px Georgia, "Times New Roman", serif;
+  color: var(--soft);
+}
+#form-page label {
+  display: block;
+  margin-top: 40px;
+  font: 600 12px/16px Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
+  cursor: text;
+}
+#form-page input {
+  display: block;
+  width: 100%;
+  height: 52px;
+  margin-top: 8px;
+  padding: 0 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font: 400 22px/1 Georgia, "Times New Roman", serif;
+  cursor: text;
+}
+#form-page input::placeholder {
+  color: rgba(43, 38, 32, 0.38);
+}
+#form-page input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+#form-page .note {
+  margin-top: 40px;
+  font: italic 400 17px/27px Georgia, "Times New Roman", serif;
+  color: var(--soft);
+}
+#form-page .hint {
+  position: absolute;
+  left: 56px;
+  bottom: 70px;
+  font: 400 13px/18px Georgia, "Times New Roman", serif;
+  color: var(--accent);
+}
+#form-page .folio {
+  position: absolute;
+  right: 48px;
+  bottom: 30px;
+  font: 400 13px/16px Georgia, "Times New Roman", serif;
+  color: var(--soft);
+}
+
+.intro {
+  position: fixed;
+  left: 24px;
+  top: 20px;
+  max-width: min(360px, calc(100vw - 48px));
+  pointer-events: none;
+}
+.intro h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.intro p {
+  margin: 2px 0 0;
+  color: var(--soft);
+}
+.intro .links {
+  pointer-events: auto;
+  margin-top: 6px;
+}
+.intro a {
+  color: var(--accent);
+}
+
+.hud {
+  position: fixed;
+  left: 24px;
+  bottom: 16px;
+  right: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  color: var(--soft);
+  font-size: 13px;
+  pointer-events: none;
+}
+.hud p {
+  margin: 0;
+}
+#status {
+  font: 12px/1.5 ui-monospace, Menlo, monospace;
+}
+kbd {
+  font: 12px ui-monospace, Menlo, monospace;
+  padding: 0 4px;
+  border: 1px solid rgba(43, 38, 32, 0.25);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .intro {
+    left: 16px;
+    top: 14px;
+  }
+  .intro h1 {
+    font-size: 22px;
+  }
+  .hud .keys {
+    display: none;
+  }
+}

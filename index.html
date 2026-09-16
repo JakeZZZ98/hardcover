@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>hardcover — a book you can hold with a pointer</title>
+    <meta name="description" content="A hardcover book for the web: drag a page, flick it, catch it mid-air, close the cover. A small physics engine and a three.js renderer." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📕</text></svg>" />
+  </head>
+  <body>
+    <main id="stage">
+      <canvas id="book" tabindex="0" aria-label="A hardcover book. Drag a page to turn it, or use the arrow keys. Escape closes the book."></canvas>
+      <!-- A live HTML page. While the book is still it lies on page 4; when anything moves it is printed into the paper. -->
+      <div id="form-page" class="asleep" inert>
+        <p class="eyebrow">Guestbook</p>
+        <h2>Write on the page</h2>
+        <p class="body">Type your name, then turn the page: what you typed is printed into the paper that moves.</p>
+        <label for="guest-name">Your name</label>
+        <input id="guest-name" type="text" autocomplete="off" spellcheck="false" placeholder="Ada Lovelace" />
+        <p class="note">While the book is still, this page is real HTML lying on the paper. The moment anything moves, it becomes ink.</p>
+        <p class="hint">Only in the reading view (Z) does the live page come out.</p>
+        <span class="folio">4</span>
+      </div>
+    </main>
+
+    <header class="intro">
+      <h1>hardcover</h1>
+      <p>Drag a page, flick it, catch it mid-air, pull the cover shut.</p>
+      <p class="links">
+        <a href="https://github.com/JakeZZZ98/hardcover/blob/main/docs/how-it-works.md">How it works</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/JakeZZZ98/hardcover">Source</a>
+      </p>
+    </header>
+
+    <footer class="hud">
+      <p class="keys"><kbd>←</kbd> <kbd>→</kbd> turn · <kbd>Esc</kbd> close · <kbd>Z</kbd> reading view</p>
+      <p id="status" aria-hidden="true"></p>
+    </footer>
+    <p id="announce" class="sr-only" aria-live="polite"></p>
+
+    <script type="module" src="/demo/main.ts"></script>
+  </body>
+</html>
