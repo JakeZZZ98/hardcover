@@ -91,12 +91,14 @@ The renderer turns a pointer into a point on the book (next paragraph). The engi
 
 The key choice is *what* follows the finger. Seen from above, the tip of a sheet at angle θ projects to
 
-$$x_{tip} = W\cos\theta.$$
-
+```math
+x_{tip} = W\cos\theta.
+```
 On grab we remember that projection, `grabX0 = W·cos θ`, and the pointer's x, `px0`. As the pointer moves by Δx, the target angle is the one whose tip projects to the moved point:
 
-$$\theta_{target} = \arccos\!\left(\frac{x_0 + \Delta x}{W}\right)$$
-
+```math
+\theta_{target} = \arccos\!\left(\frac{x_0 + \Delta x}{W}\right)
+```
 ![The tip's projection follows the pointer](images/drag-mapping.svg)
 
 So the edge you hold stays under your finger for the whole turn, whichever point of the page you took. (Lifting a page toward you is not something a flat pointer can express; projection is the honest mapping.)
@@ -127,8 +129,9 @@ with `flick = 1.2` page widths per second and `threshold = 0.5`.
 
 The release speed is then handed to the settle spring as an angular velocity. Differentiating the tip projection, ẋ = −W sin θ · ω, so
 
-$$\omega_0 = -\frac{v_x}{W\,\max(\sin\theta,\ 0.35)}$$
-
+```math
+\omega_0 = -\frac{v_x}{W\,\max(\sin\theta,\ 0.35)}
+```
 clamped to ±12 rad/s. The floor on sin θ stops a nearly flat page from receiving an absurd spin; the clamp stops a violent throw from looking broken. A hard flick therefore arrives with a little overshoot, a lazy one just drifts over — without any special casing.
 
 **The spring.** Settles use Apple's parameterisation — a *damping ratio* ζ and a *response* (the period of the undamped oscillation) — because those two numbers mean something to a designer, where stiffness and damping coefficients do not:
@@ -187,8 +190,9 @@ bendOf(sheet) {
 
 The renderer bends each row of the sheet into a circular arc. At fraction u across the page (0 at the spine, 1 at the fore-edge), the paper's direction is φ(u) = θ + c·u. Integrating the unit tangent (cos φ, sin φ) over the page length L gives a closed form:
 
-$$x(u) = L\,\frac{\sin(\theta + c\,u) - \sin\theta}{c},\qquad z(u) = L\,\frac{\cos\theta - \cos(\theta + c\,u)}{c}$$
-
+```math
+x(u) = L\,\frac{\sin(\theta + c\,u) - \sin\theta}{c},\qquad z(u) = L\,\frac{\cos\theta - \cos(\theta + c\,u)}{c}
+```
 (and the straight line L·u·(cos θ, sin θ) when c ≈ 0). The arc grows away from the row you grabbed — `c · (1 + spread·|y − grabY|)` — so the corner you are holding leads and the far corner trails. Finally the arc is clamped to [−θ, π − θ] so no part of the page can go through the table or past flat on the other side.
 
 ![A row of the sheet is a circular arc](images/bend-arc.svg)
@@ -220,8 +224,9 @@ A book is a stack of sheets that must never pass through one another. The obviou
 
 But every sheet turns about **the same axis**. For coaxial sheets, "cannot pass through" is not a 3D question at all. It is an ordering:
 
-$$\theta_{cover} \;\ge\; \theta_{flyleaf} \;\ge\; \theta_{leaf\,0} \;\ge\; \theta_{leaf\,1} \;\ge\; \dots \;\ge\; 0$$
-
+```math
+\theta_{cover} \;\ge\; \theta_{flyleaf} \;\ge\; \theta_{leaf\,0} \;\ge\; \theta_{leaf\,1} \;\ge\; \dots \;\ge\; 0
+```
 ![Non-penetration is an ordering of angles](images/angle-chain.svg)
 
 `resolveChain` enforces it after every physics step with one pass forward and one back (so a push travels down a run of sheets in either direction). For each neighbouring pair (a, b) where b has overtaken a:
@@ -243,8 +248,9 @@ The cover is a sheet like any other — same drag, flick, catch and settle — w
 
 When the cover starts to move, the engine gathers a **bundle**: the flyleaf (glued to the cover: it copies the cover exactly) and every leaf currently lying on the left, innermost deepest. Each bundled sheet chases a target just ahead of the cover:
 
-$$\theta_{target} = \theta_{cover} - fan \cdot depth \cdot \sin\theta_{cover}$$
-
+```math
+\theta_{target} = \theta_{cover} - \text{fan}\cdot\text{depth}\cdot\sin\theta_{cover}
+```
 with its own critically damped spring, response `0.10 + 0.025·depth` s. The `sin θ` makes the fan open in the middle of the motion and close again at both ends, so the pages arrive together; the deeper, slower springs make the innermost pages fall first, like a real book falling shut. When the cover lands, the bundle lands with it: shut, every page lies right (a book that is opened again starts at the first spread); opened, they return to the left.
 
 ## 9. When the axes are not shared
