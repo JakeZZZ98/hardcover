@@ -1,0 +1,26 @@
+{
+  "name": "hardcover",
+  "version": "0.1.0",
+  "description": "A hardcover book for the web whose pages you can drag, flick, catch mid-air and close — a small physics engine plus a three.js renderer.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "verify": "vite build && node verify/run.mjs"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.170.0",
+    "lil-gui": "^0.21.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.4.3",
+    "vitest": "^3.2.7"
+  }
+}
